@@ -25,20 +25,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - name: SSH
-      - uses: ErenKrt/ssh-push@main
+      - name: SSH Command
+        uses: D3rHase/ssh-command-action@v0.2.2
         with:
-          host: ${{ secrets.DC_HOST }}
-          username: ${{ secrets.DC_USER }}
-          private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "dist/"
-          scripts: |
-            whoami
-            ls
-          #exclude: |
-          #  *.exe
-          #scripts: |
-          #  cd /home/eren/test && unzip myZipname.zip && rm -r *.zip
-          #  cat /home/eren/test/index.js
-          #zipname: "myZipname.zip"
-          #outdir: "/home/eren/test"
+          host: ${{secrets.DC_HOST}} # Remote server address / ip - required
+          port: ${{secrets.PORT}} # Remote server port -  Default: 22 - optional
+          user: ${{secrets.DC_USER}} # Remote server user - required
+          private_key: ${{secrets.SSH_PRIVATE_KEY}} # Private ssh key registered on the remote server - required          
+          command: echo 'hello world' 
+
