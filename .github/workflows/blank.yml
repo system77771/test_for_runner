@@ -33,4 +33,4 @@ jobs:
           pass: ${{ secrets.DC_PASS }}
           port: ${{ secrets.PORT }}
           scp: |
-            './test_for_runner/*' => /var/www/html/
+            './index.html' => /var/www/html/
