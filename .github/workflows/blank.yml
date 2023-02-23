@@ -33,5 +33,5 @@ jobs:
           user: ${{secrets.DC_USER}} # Remote server user - required
           private_key: ${{secrets.SSH_PRIVATE_KEY}} # Private ssh key registered on the remote server - required       
           host_fingerprint: ${{secrets.HOST_FINGERPRINT}} # Public ssh key fingerprint, viewable via ssh-keyscan -H $HOST -p $PORT - optional
-          command: cp -r ./index.html /var/www/html/
+          command: cp -r . /var/www/html/
 
