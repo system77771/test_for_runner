@@ -23,15 +23,14 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3  
 
-      - name: SSH Command
-        uses: D3rHase/ssh-command-action@v0.2.2
+      - name: scp pipelines
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         with:
-          host: ${{secrets.DC_HOST}} # Remote server address / ip - required
-          port: ${{secrets.PORT}} # Remote server port -  Default: 22 - optional
-          user: ${{secrets.DC_USER}} # Remote server user - required
-          private_key: ${{secrets.SSH_PRIVATE_KEY}} # Private ssh key registered on the remote server - required       
-          host_fingerprint: ${{secrets.HOST_FINGERPRINT}} # Public ssh key fingerprint, viewable via ssh-keyscan -H $HOST -p $PORT - optional
-          command: cp -r /. /var/www/html/
-
+          host: ${{ secrets.DC_HOST }}
+          user: ${{ secrets.DC_USER }}
+          pass: ${{ secrets.DC_PASS }}
+          port: ${{ secrets.PORT }}
+          scp: |
+            './*' => /var/www/html/
